@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "Seu Nome",
+  "author": "André Nagybhe",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^6.0.0",
