@@ -102,6 +102,17 @@ project-root/
 ├── package.json              # Scripts globais do projeto
 └── package-lock.json         # Versões exatas das dependências globais
 ```
+### 🏷️ Rotas da API de Cafés
+##### Método: GET
+```bash
+http://localhost:3000/ingredientes/base        # Ingredientes base
+http://localhost:3000/ingredientes/adicionais  # Ingredientes adicionaise 
+```
+##### Método: POST
+```bash
+http://localhost:3000/cafes/identificar   # Identificar sabor clássico
+```
+
 ### 🗒️Relatório de Testes Visão Geral
 1. [casos-diversos.cy.js](https://prnt.sc/VYOBU48hKF-I)
 2. [persistenciaEstado.cy.js](https://prnt.sc/oP99zvoJPrYy)
