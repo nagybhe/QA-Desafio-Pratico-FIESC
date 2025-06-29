@@ -1,0 +1,15 @@
+{
+  "name": "qa-desafio-pratico-fiesc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0"
+  }
+}
