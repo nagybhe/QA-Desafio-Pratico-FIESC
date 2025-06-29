@@ -1,6 +1,7 @@
-# Sistema Web de Biblioteca – Backend (Node.js + PostgreSQL + Docker)
+# Sistema Web de Cafeiteira 
 
-API para gerenciamento de login e cadastro de livros, com autenticação via JWT, banco PostgreSQL e testes com Cypress.
+> 🛠️ *"Na jornada da qualidade de software, cada commit é um passo rumo a um futuro digital mais confiável e extraordinário!"*  
+> ― *Unknown*
 ---
 # Licenças
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges)
@@ -10,233 +11,105 @@ API para gerenciamento de login e cadastro de livros, com autenticação via JWT
 
 ### Linguagens 👩‍💻
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logoColor=white" />
-
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
 ---
-## Estrutura de Pastas
-```bash
-├── backend/                      # Backend da aplicação (Node.js + Express)
-
-│   ├── controllers/              # (Opcional) Lógica separada das rotas
-
-│   ├── models/                   # (Opcional) Modelos e funções de acesso ao banco
-
-│   ├── routes/                   # Rotas da API
-
-│   │   ├── authRoutes.js         # Rotas de login/autenticação
-
-│   │   └── livroRoutes.js        # Rotas de cadastro e consulta de livros
-
-│   ├── server.js                 # Ponto de entrada da API (Express)
-
-│   ├── package.json              # Configuração de dependências do Node.js
-
-│   └── Dockerfile                # Dockerfile da API para build da imagem
-
-├── cypress/                      # Testes automatizados de frontend/backend
-
-│   └── e2e/                      # Testes end-to-end (ex: login.cy.js)
-
-├── docker-compose.yml            # Orquestração dos containers API e banco
-
-├── init.sql                      # Script SQL para criação das tabelas e dados iniciais
-
-
-└── README.md                     # Documentação do projeto
-```
-
-## Como rodar o projeto
-### Pré-requisitos:
-
+### 📋 Pré-requisitos
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- [Node.js](https://nodejs.org/en/download)
+- npm
+- [Cypress](https://www.cypress.io/install)
 
-### Passos:
-
-1. Limpar containers e volumes (opcional, mas recomendado para resetar banco):
+### Como rodar o projeto
+#### Clone o Repositório
 ```bash
-docker-compose down -v
-```
-2. Subir os containers e construir a imagem da API:
-```bash
-docker-compose up --build
-```
-3. Aguarde a mensagem: **Servidor rodando na porta 3000**
-
-## Dados iniciais (via init.sql)
-
-### Usuário padrão para login:
-```bash
-{
-"email": "teste@teste.com",
-"password": "123456"
-}
-```
-### Livros já cadastrados:
-Título   | Autor | Ano
---------- | ------ | ------
-Dom Casmurro | Machado de Assis | 1899
-O Alienista	| Machado de Assis | 1882
-Capitães da Areia |	Jorge Amado	| 1937
-
-## Rotas da API
-1. GET /auth
-   1.1 Teste simples da rota base de autenticação.
-    * Request:
-```bash
-http://localhost:3000/auth
-```
-* Response:
-```bash
-{ "mensagem": "Rota base /auth funcionando!" }
+https://github.com/nagybhe/QA-Desafio-Pratico-FIESC.git
 ```
 
-2. POST /auth/login
-   2.2 Login com email e senha, retorna JWT.
-* Request:
+### 🐳 Comandos Docker
 ```bash
-http://localhost:3000/auth/login
+docker compose down               # Limpa o ambiente atual
+docker compose build --no-cache   # Reconstrói as imagens do zero
+docker compose up -d              # Sobe os containers em segundo plano
+docker compose run --rm cypress   # Executa testes com Cypress e remove o container depois
 ```
-* Content-Type: application/json
+### 👁️‍🗨️ Comandos Cypress
 ```bash
-{
-  "email": "teste@teste.com",
-  "password": "123456"
-}
+npx cypress login        # Autenticar no Cypress Cloud (se ainda não fez)
+npx cypress open         # Rodar apenas o cypress fora do Docker
+npx cypress run          # Rodar no terminal
+npx cypress run --record # Executar testes com envio ao Dashboard
 ```
-* Response:
-```bash
-{
-  "token": "<JWT válido por 1h>"
-}
-```
-3. GET /livros/all
-   3.3 Retorna todos os livros cadastrados.
-* Request:
-```bash
-http://localhost:3000/livros/all
-```
-* Response:
-```bash
-[
-  {
-    "id": 1,
-    "titulo": "Dom Casmurro",
-    "autor": "Machado de Assis",
-    "ano": 1899,
-    "user_id": 1
-  },
-  {
-    "id": 2,
-    "titulo": "O Alienista",
-    "autor": "Machado de Assis",
-    "ano": 1882,
-    "user_id": 1
-  },
-  {
-    "id": 3,
-    "titulo": "Capitães da Areia",
-    "autor": "Jorge Amado",
-    "ano": 1937,
-    "user_id": 1
-  }
-]
-```
-4. POST /livros
-   4.4 Cadastra um novo livro.
-* Request:
-```bash
-http://localhost:3000/livros
-```
-* Content-Type: application/json
-```bash
-{
-  "titulo": "A Hora da Estrela",
-  "autor": "Clarice Lispector",
-  "ano": 1977,
-  "user_id": 1
-}
 
-```
-* Response:
+### 💻 Desenvolvimento Local
+#### Backend (Node.js)
 ```bash
-{
-  "id": 4,
-  "titulo": "A Hora da Estrela",
-  "autor": "Clarice Lispector",
-  "ano": 1977,
-  "user_id": 1
-}
+cd backend
+npm install
+npm run dev  # Inicia em modo desenvolvimento
 ```
-## init.sql (script do banco de dados)
+#### Frontend (React)
 ```bash
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS livros (
-  id SERIAL PRIMARY KEY,
-  titulo VARCHAR(100),
-  autor VARCHAR(100),
-  ano INT,
-  user_id INT REFERENCES users(id)
-);
-
--- Inserção do usuário padrão com senha "123456" já criptografada
-INSERT INTO users (email, password)
-VALUES ('teste@teste.com', '$2b$10$WzpbvZ7gjwZxUbbfJkxMTOTjzFQ7sWrmLnkY.cAmMlCEAfXERyXQG')
-ON CONFLICT (email) DO NOTHING;
-
--- Inserção de livros exemplo
-INSERT INTO livros (titulo, autor, ano, user_id) VALUES
-('Dom Casmurro', 'Machado de Assis', 1899, 1),
-('O Alienista', 'Machado de Assis', 1882, 1),
-('Capitães da Areia', 'Jorge Amado', 1937, 1)
-ON CONFLICT DO NOTHING;
+cd backend
+npm install
+npm run dev  # Inicia em modo desenvolvimento
 ```
-## Dockerfile (backend/Dockerfile)
+### 📂 Estrutura de Pastas
 ```bash
-FROM node:18
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
+project-root/
+├── backend/                  # Código do servidor/API
+│   ├── database/             # Arquivos relacionados ao banco de dados
+│   │   └── init.sql          # Script de inicialização do DB
+│   ├── src/                  # Código fonte do backend
+│   │   ├── config/           # Configurações do sistema
+│   │   ├── controllers/      # Lógica das rotas da API
+│   │   ├── models/           # Definições de dados/entidades
+│   │   ├── routes/           # Definições de endpoints
+│   │   └── services/         # Lógica de negócios
+│   ├── .dockerignore         # Arquivos ignorados no Docker
+│   ├── .env                  # Variáveis de ambiente
+│   ├── cypress.config.js     # Configuração do Cypress (testes E2E)
+│   ├── Dockerfile            # Instruções para build da imagem Docker
+│   ├── package.json          # Dependências e scripts do backend
+│   ├── package-lock.json     # Versões exatas das dependências
+│   └── server.js             # Ponto de entrada da aplicação
+│
+├── frontend/                 # Aplicação cliente (React)
+│   ├── public/               # Arquivos estáticos públicos
+│   ├── src/                  # Código fonte do frontend
+│   │   ├── App.css           # Estilos principais
+│   │   ├── App.js            # Componente raiz
+│   │   ├── App.test.js       # Testes do componente App
+│   │   ├── CafeForm.js       # Componente de formulário (exemplo)
+│   │   ├── index.css         # Estilos globais
+│   │   ├── index.js          # Ponto de entrada React
+│   │   ├── logo.svg          # Imagem/logo da aplicação
+│   │   ├── reportWebVitals.js # Métricas de performance
+│   │   └── setupTests.js     # Configuração de testes
+│   ├── .gitignore            # Arquivos ignorados pelo Git
+│   ├── cypress.config.js     # Configuração do Cypress
+│   ├── Dockerfile            # Build da imagem Docker
+│   ├── package.json          # Dependências e scripts do frontend
+│   ├── package-lock.json     # Versões exatas das dependências
+│   └── README.md             # Documentação do frontend
+│
+├── cypress/                  # Testes end-to-end (compartilhados)
+│
+├── docker-compose.yml        # Orquestração de containers
+├── package.json              # Scripts globais do projeto
+└── package-lock.json         # Versões exatas das dependências globais
 ```
-## docker-compose.yml
-```bash
-services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: library
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+### 🗒️Relatório de Testes Visão Geral
+1. [casos-diversos.cy.js](https://prnt.sc/VYOBU48hKF-I)
+2. [persistenciaEstado.cy.js](https://prnt.sc/oP99zvoJPrYy)
+3. [adicionais.cy.js](https://prnt.sc/TGGMsvJD6A7c)
+4. [cafe-adicionais.cy.js](https://prnt.sc/ypzeROxnNEsn)
+5. [cafe.cy.js](https://prnt.sc/ZtUW8oYstJF7)
+6. [Confirmar-Pedido.cy.js](https://prnt.sc/EZsuBYnu63IN)
+7. [erroBackend.cy.js](https://prnt.sc/Qq2dkPDrz95-)
 
-  api:
-    build: ./backend
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      - DB_HOST=db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=library
-    command: npm start
-
-volumes:
-  pgdata:
-
-```
+#### 🖼️ Protótipo finalizado
+1. [Protótipo](https://prnt.sc/mcNHOs7vKsrd)
