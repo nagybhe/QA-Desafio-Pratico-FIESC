@@ -1,6 +1,6 @@
 # 🧪 Desafio Técnico - Analista de Qualidade Software PL
 
-<div align="center"> <a href="./docs/DESAFIO%20T%C3%89CNICO%20-%20ANALISTA%20DE%20QUALIDADE%20JR_SR.pdf"> <img src="https://img.shields.io/badge/📄%20Desafio%20Original-Baixar%20PDF-blue?style=for-the-badge" alt="Desafio Original"/> </a> </div>
+<div align="center"> <a href="docs/Desafio%20Técnico%20-%20Analista%20de%20Qualidade%20Software%20PL(01517_2025).docx.pdf"> <img src="https://img.shields.io/badge/📄%20Desafio%20Original-Baixar%20PDF-blue?style=for-the-badge" alt="Desafio Original"/> </a> </div>
 
 ## 📋 Sobre o Desafio
 
