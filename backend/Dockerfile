@@ -1,21 +1,20 @@
-# backend/Dockerfile
+# Imagem base
+FROM node:18-alpine
 
-FROM node:18
-
-# Diretório de trabalho dentro do container
+# Definir diretório de trabalho
 WORKDIR /app
 
-# Copia apenas os arquivos de dependência primeiro (cache mais eficiente)
+# Copiar arquivos de dependências
 COPY package*.json ./
 
-# Instala as dependências
-RUN npm install
+# Instalar dependências
+RUN npm ci --only=production
 
-# Copia o restante do código
+# Copiar código fonte
 COPY . .
 
-# Expõe a porta usada pela aplicação
+# Expor porta
 EXPOSE 3000
 
-# Comando para iniciar o servidor
+# Comando para iniciar a aplicação
 CMD ["node", "server.js"]

@@ -1,27 +1,50 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const ingredienteRoutes = require('./src/routes/ingredienteRoutes');
 const cafeRoutes = require('./src/routes/cafeRoutes');
+const pedidoRoutes = require('./src/routes/pedidoRoutes'); // NOVA ROTA
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const cors = require('cors');
 app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.json());
-
-// Rotas principais da API
+// Rotas
 app.use('/ingredientes', ingredienteRoutes);
 app.use('/cafes', cafeRoutes);
+app.use('/pedidos', pedidoRoutes); // NOVA ROTA
 
-// Rota raiz (saúde da API)
+// Rota de teste
 app.get('/', (req, res) => {
-    res.status(200).send('🚀 API da Cafeteria está rodando!');
+    res.json({ 
+        mensagem: 'API da Cafeteria está rodando!',
+        endpoints: {
+            ingredientes: '/ingredientes',
+            cafes: '/cafes',
+            pedidos: '/pedidos'
+        }
+    });
 });
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Servidor rodando na porta ${port}`);
+// Tratamento de erros global
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
 });
 
+// 404
+app.use((req, res) => {
+    res.status(404).json({ erro: 'Rota não encontrada' });
+});
+
+
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Servidor rodando na porta ${port}`);
+    });
+}
+
+module.exports = app; // Exportar app para os testes

@@ -1,126 +1,389 @@
-# Sistema Web de Cafeiteira 
+# 🧪 Desafio Técnico - Analista de Qualidade Software PL
 
-> 🛠️ *"Na jornada da qualidade de software, cada commit é um passo rumo a um futuro digital mais confiável e extraordinário!"*  
-> ― *Unknown*
+<div align="center"> <a href="./docs/DESAFIO%20T%C3%89CNICO%20-%20ANALISTA%20DE%20QUALIDADE%20JR_SR.pdf"> <img src="https://img.shields.io/badge/📄%20Desafio%20Original-Baixar%20PDF-blue?style=for-the-badge" alt="Desafio Original"/> </a> </div>
+
+## 📋 Sobre o Desafio
+
+Este projeto foi desenvolvido como solução para o **Desafio Técnico - Analista de Qualidade Software PL (01517/2025)**. Consiste em um sistema de autoatendimento para cafeteria onde os clientes podem montar seus cafés personalizados, selecionando ingredientes base e adicionais, com identificação automática de sabores clássicos.
+
+**Tempo limite:**  5 dias corridos
+
+**Data de entrega:** Dia 27 de junho de 2025 às 23h59.
+
+## 🚀 Tecnologias Utilizadas
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+  <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest"/>
+  <img src="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white" alt="Cypress"/>
+</div>
+
+
+## 📁 Estrutura do Projeto
+
+```bash
+QA-Desafio-Pratico-FIESC/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── Dockerfile
+│   └── server.js
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
+│   ├── public/
+│   └── Dockerfile
+│
+├── database/
+│   └── migrations/
+│       ├── 001_create_ingredientes_table.sql
+│       ├── 002_create_sabores_classicos_table.sql
+│       ├── 003_create_sabor_ingredientes_table.sql
+│       ├── 004_create_pedidos_tables.sql
+│       ├── 005_create_functions_triggers.sql
+│       └── 006_insert_initial_data.sql
+│
+├── testes/
+│   ├── unitarios/
+│   │   ├── backend/
+│   │   └── frontend/
+│   │
+│   ├── e2e/
+│   │   └── cypress/
+│   │       ├── e2e/
+│   │       └── fixtures/
+│   │
+│   ├── documentacao/
+│   │   ├── gherkin/
+│   │   │   ├── features/
+│   │   │   └── step_definitions/
+│   │   └── plano-testes.md
+│   │
+│   └── reports/
+│
+├── docs/
+├── docker-compose.yml
+└── README.md
+```
+
 ---
-# Licenças
-[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges)
-# Ferramentas e Linguagens Utilizadas
-### Ferramentas 🛠️
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SEUUSERNAME) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-000?style=for-the-badge&logo=postgresql) ![Windows](https://img.shields.io/badge/Windows-000?style=for-the-badge&logo=windows&logoColor=2CA5E0) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 
-### Linguagens 👩‍💻
+## ✅ Requisitos Atendidos
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
+### Requisitos Funcionais
+
+| ID | Descrição | Status |
+|---|---|---|
+| RF001 | Selecionar Ingredientes Base | ✅ |
+| RF002 | Identificar Sabor Clássico | ✅ |
+| RF003 | Selecionar Ingredientes Adicionais | ✅ |
+| RF004 | Gerar Nome e Descrição do Café | ✅ |
+| RF005 | Visualizar Resumo do Café | ✅ |
+| RF006 | Confirmar Pedido do Café | ✅ |
+
 ---
-### 📋 Pré-requisitos
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/en/download)
-- npm
-- [Cypress](https://www.cypress.io/install)
 
-### Como rodar o projeto
-#### Clone o Repositório
-```bash
-https://github.com/nagybhe/QA-Desafio-Pratico-FIESC.git
+### Regras de Negócio
+
+| ID | Descrição | Status |
+|---|---|---|
+| RN001.1-5 | Regras para ingredientes base | ✅ |
+| RN002.1-5 | Regras para identificação de sabores | ✅ |
+| RN003.1-5 | Regras para ingredientes adicionais | ✅ |
+| RN004.1-2 | Regras para geração de nome | ✅ |
+| RN005.1-4 | Regras para resumo | ✅ |
+| RN006.1-2 | Regras para confirmação | ✅ |
+| RN-G02.1-2 | Feedback visual | ✅ |
+| RN-G03.1-2 | Estado da aplicação | ✅ |
+
+---
+
+### Requisitos Não Funcionais
+
+| ID | Descrição | Status | Observação |
+|---|---|---|---|
+| RQNF1 | Linguagens OO + PostgreSQL | ✅ | Node.js / React |
+| RQNF2 | Docker em contêineres distintos | ✅ | docker-compose |
+| RQNF3 | Testes unitários | ✅ | 99+ testes |
+| RQNF4 | Backend sem acesso público | ✅ | API local |
+| RQNF5 | Códigos HTTP apropriados | ✅ | 200,201,400,404,500 |
+| RQNF6 | Frontend trata erros | ✅ | Alertas |
+| RQNF7 | Migrations banco | ✅ | Scripts SQL |
+| RQNF8 | Testes de API | ✅ | Cypress |
+| RQNF9 | Testes E2E | ✅ | Cypress |
+| RQNF10 | README configuração | ✅ | Documentado |
+| RQNF11 | Revisão código README | ✅ | Incluído |
+| RQNF12 | Relatório SonarQube | ⏳ | Planejado |
+| RQNF13 | Gherkin | ✅ | 20 cenários |
+| RQNF14 | Plano de testes | ✅ | Documentado |
+| RQNF15 | Caixa branca/preta | ✅ | Plano testes |
+| RQNF16 | Categorias de testes | ✅ | Unit / API / E2E |
+| RQNF17 | Bug identificado | ✅ | Documentado |
+| RQNF18 | Requisitos não atendidos | ✅ | Documentado |
+
+---
+
+## 🐛 Bugs Encontrados
+
+### Bug #001 — Preço incorreto no resumo
+
+| Campo | Valor |
+|---|---|
+| Severidade | Média |
+| Status | Corrigido |
+
+**Passos para reproduzir**
+
+1. Selecionar Espresso (3,50)
+2. Selecionar Leite (2,00)
+3. Confirmar pedido
+
+**Resultado esperado**
+
+```
+Preço total: R$ 5,50
 ```
 
-### 🐳 Comandos Docker
-```bash
-docker compose down               # Limpa o ambiente atual
-docker compose build --no-cache   # Reconstrói as imagens do zero
-docker compose up -d              # Sobe os containers em segundo plano
-docker compose run --rm cypress   # Executa testes com Cypress e remove o container depois
+**Resultado atual**
+
 ```
-### 👁️‍🗨️ Comandos Cypress
-```bash
-npx cypress login        # Autenticar no Cypress Cloud (se ainda não fez)
-npx cypress open         # Rodar apenas o cypress fora do Docker
-npx cypress run          # Rodar no terminal
-npx cypress run --record # Executar testes com envio ao Dashboard
+Preço total: R$ 5,00
 ```
 
-### 💻 Desenvolvimento Local
-#### Backend (Node.js)
+---
+
+## ⚠️ Requisitos Não Atendidos
+
+### RQNF12 — Relatório SonarQube
+
+Devido ao prazo limitado do desafio, foi priorizada a implementação dos requisitos obrigatórios.
+
+O relatório SonarQube está planejado para versões futuras.
+
+---
+
+## ⚙️ Configuração do Ambiente
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm 9+
+- PostgreSQL 15+
+- Docker (opcional)
+
+---
+
+### Instalação
+
+```bash
+git clone https://github.com/seu-usuario/QA-Desafio-Pratico-FIESC.git
+
+cd QA-Desafio-Pratico-FIESC
+```
+
+Instalar dependências
+
 ```bash
 cd backend
 npm install
-npm run dev  # Inicia em modo desenvolvimento
+
+cd ../frontend
+npm install
+
+cd ../testes
+npm install
 ```
-#### Frontend (React)
+
+---
+
+## 🗄️ Banco de Dados
+
+Criar banco
+
+```bash
+sudo -u postgres psql -c "CREATE DATABASE cafeteria;"
+```
+
+Executar migrations
+
+```bash
+psql -U postgres -d cafeteria -f database/migrations/001_create_ingredientes_table.sql
+psql -U postgres -d cafeteria -f database/migrations/002_create_sabores_classicos_table.sql
+psql -U postgres -d cafeteria -f database/migrations/003_create_sabor_ingredientes_table.sql
+psql -U postgres -d cafeteria -f database/migrations/004_create_pedidos_tables.sql
+psql -U postgres -d cafeteria -f database/migrations/005_create_functions_triggers.sql
+psql -U postgres -d cafeteria -f database/migrations/006_insert_initial_data.sql
+```
+
+---
+
+## 🔐 Variáveis de Ambiente
+
+### backend/.env
+
+```env
+PORT=3000
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=cafeteria
+DB_USER=postgres
+DB_PASSWORD=postgres
+```
+
+### frontend/.env
+
+```env
+REACT_APP_API_URL=http://localhost:3000
+```
+
+---
+
+## 🚀 Executando a Aplicação
+
+### Com Docker
+
+```bash
+docker-compose up -d
+```
+
+| Serviço | URL |
+|---|---|
+| Frontend | http://localhost:3001 |
+| Backend | http://localhost:3000 |
+| Banco | localhost:5432 |
+
+---
+
+### Sem Docker
+
+Backend
+
 ```bash
 cd backend
-npm install
-npm run dev  # Inicia em modo desenvolvimento
-```
-### 📂 Estrutura de Pastas
-```bash
-project-root/
-├── backend/                  # Código do servidor/API
-│   ├── database/             # Arquivos relacionados ao banco de dados
-│   │   └── init.sql          # Script de inicialização do DB
-│   ├── src/                  # Código fonte do backend
-│   │   ├── config/           # Configurações do sistema
-│   │   ├── controllers/      # Lógica das rotas da API
-│   │   ├── models/           # Definições de dados/entidades
-│   │   ├── routes/           # Definições de endpoints
-│   │   └── services/         # Lógica de negócios
-│   ├── .dockerignore         # Arquivos ignorados no Docker
-│   ├── .env                  # Variáveis de ambiente
-│   ├── cypress.config.js     # Configuração do Cypress (testes E2E)
-│   ├── Dockerfile            # Instruções para build da imagem Docker
-│   ├── package.json          # Dependências e scripts do backend
-│   ├── package-lock.json     # Versões exatas das dependências
-│   └── server.js             # Ponto de entrada da aplicação
-│
-├── frontend/                 # Aplicação cliente (React)
-│   ├── public/               # Arquivos estáticos públicos
-│   ├── src/                  # Código fonte do frontend
-│   │   ├── App.css           # Estilos principais
-│   │   ├── App.js            # Componente raiz
-│   │   ├── App.test.js       # Testes do componente App
-│   │   ├── CafeForm.js       # Componente de formulário (exemplo)
-│   │   ├── index.css         # Estilos globais
-│   │   ├── index.js          # Ponto de entrada React
-│   │   ├── logo.svg          # Imagem/logo da aplicação
-│   │   ├── reportWebVitals.js # Métricas de performance
-│   │   └── setupTests.js     # Configuração de testes
-│   ├── .gitignore            # Arquivos ignorados pelo Git
-│   ├── cypress.config.js     # Configuração do Cypress
-│   ├── Dockerfile            # Build da imagem Docker
-│   ├── package.json          # Dependências e scripts do frontend
-│   ├── package-lock.json     # Versões exatas das dependências
-│   └── README.md             # Documentação do frontend
-│
-├── cypress/                  # Testes end-to-end (compartilhados)
-│
-├── docker-compose.yml        # Orquestração de containers
-├── package.json              # Scripts globais do projeto
-└── package-lock.json         # Versões exatas das dependências globais
-```
-### 🏷️ Rotas da API de Cafés
-##### Método: GET
-```bash
-http://localhost:3000/ingredientes/base        # Ingredientes base
-http://localhost:3000/ingredientes/adicionais  # Ingredientes adicionaise 
-```
-##### Método: POST
-```bash
-http://localhost:3000/cafes/identificar   # Identificar sabor clássico
+npm start
 ```
 
-### 🗒️Relatório de Testes Visão Geral
-1. [casos-diversos.cy.js](https://prnt.sc/VYOBU48hKF-I)
-2. [persistenciaEstado.cy.js](https://prnt.sc/oP99zvoJPrYy)
-3. [adicionais.cy.js](https://prnt.sc/TGGMsvJD6A7c)
-4. [cafe-adicionais.cy.js](https://prnt.sc/ypzeROxnNEsn)
-5. [cafe.cy.js](https://prnt.sc/ZtUW8oYstJF7)
-6. [Confirmar-Pedido.cy.js](https://prnt.sc/EZsuBYnu63IN)
-7. [erroBackend.cy.js](https://prnt.sc/Qq2dkPDrz95-)
+Frontend
 
-#### 🖼️ Protótipo finalizado
-1. [Protótipo](https://prnt.sc/mcNHOs7vKsrd)
+```bash
+cd frontend
+npm start
+```
+
+Testes
+
+```bash
+cd testes
+npm test
+```
+
+---
+
+## 🧪 Executando os Testes
+
+### Testes Unitários
+
+```bash
+npm run test:unit:backend
+```
+
+99+ testes
+
+---
+
+### Testes API
+
+```bash
+npm run test:api
+```
+
+17 testes
+
+---
+
+### Testes E2E
+
+```bash
+npm run test:e2e
+```
+
+15+ testes
+
+---
+
+### Todos os testes
+
+```bash
+npm run test:all
+```
+
+---
+
+## 📊 Cobertura de Testes
+
+```bash
+npm run test:coverage
+```
+
+Relatório gerado em
+
+```
+testes/reports/coverage
+```
+
+---
+
+## 📘 Especificações Gherkin
+
+Localização
+
+```
+testes/documentacao/gherkin/features
+```
+
+Features disponíveis
+
+- ingredientes.feature
+- sabores.feature
+- pedido.feature
+
+Total: **20 cenários**
+
+---
+
+## Plano de Testes
+
+Documento disponível em
+
+```
+testes/documentacao/plano-testes.md
+```
+
+### Categorias de Teste
+
+- ✅ Testes Unitários
+- ✅ Testes de Integração
+- ✅ Testes de API
+- ✅ Testes E2E
+- ✅ Testes de Regressão
+- ✅ Testes de Validação
+
+### Caixa Branca vs Caixa Preta
+
+| Tipo | Quantidade | Exemplos |
+|---|---|---|
+| Caixa Branca | 50+ | Testes de services, validações internas |
+| Caixa Preta | 80+ | Testes E2E, API, fluxos de usuário |
